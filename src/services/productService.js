@@ -1,4 +1,4 @@
-const Produto = require("../models/produtoModel"); // Assumindo que o model Produto foi criado
+const Produto = require("../models/Produto"); // Assumindo que o model Produto foi criado
 
 // Serviço para encontrar um produto por ID
 const findProductByIdService = (id) => {

@@ -3,11 +3,18 @@ const connectDatabase = require("./src/utils/connectDatabase");
 const userRoutes = require("./src/routes/userRoutes");
 const productRoutes = require("./src/routes/productRoutes"); // Importe as rotas de produtos
 const categoriaRoutes = require("./src/routes/categoriaRoutes");
+const swaggerUi = require("swagger-ui-express");
 
 const app = express();
 connectDatabase();
 
 app.use(express.json());
+
+// Swagger setup
+const swaggerDocument = require("./src/swagger/swagger.json");  // Caminho para o arquivo JSON
+
+// Usando o Swagger UI para exibir o JSON gerado
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Defina a rota base para os usuários
 app.use("/api/users", userRoutes);
