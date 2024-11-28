@@ -6,8 +6,8 @@ const findProductByIdService = (id) => {
 };
 
 // Serviço para encontrar todos os produtos
-const findAllProductsService = () => {
-    return Produto.find();
+const findAllProductsService = (limit, offset) => {
+    return Produto.find().limit(limit).skip(offset);
 };
 
 // Serviço para criar um novo produto
@@ -26,6 +26,8 @@ const deleteProductService = (id) => {
 };
 
 const addCategoriaProductService = (id, categoria) => {
+    console.log(categoria, 'addCategoriaProductService')
+    console.log(id, 'addCategoriaProductService')
     return Produto.findOneAndUpdate(
         {
             _id: id
@@ -33,7 +35,7 @@ const addCategoriaProductService = (id, categoria) => {
         {
             $push: {
                 categoria: {
-                    _id: categoria._id,
+                    _id: id,
                     createdAt: categoria.createdAt
                 }
             }

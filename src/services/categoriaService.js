@@ -2,6 +2,7 @@ const Categoria = require("../models/categoria");
 
 // Função para criar uma nova categoria
 const createCategoria = async (nome) => {
+  console.log(nome, 'categoriaService')
   try {
     const categoria = new Categoria({ nome });
     await categoria.save();

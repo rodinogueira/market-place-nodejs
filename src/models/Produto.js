@@ -6,7 +6,7 @@ const CategoriaSchema = new mongoose.Schema(
     _id: { type: mongoose.Schema.Types.ObjectId, ref: "categorias", required: true },
     createdAt: { type: Date, default: Date.now },
   },
-  { _id: false } // Impede a criação de um campo _id para o array de categorias
+  // { _id: false } // Impede a criação de um campo _id para o array de categorias
 );
 
 // Definindo o schema do produto
@@ -17,7 +17,7 @@ const ProdutoSchema = new mongoose.Schema(
     precoUnitario: { type: Number, required: true },
     imagem: { type: String, required: true },
     codigoBarra: { type: String, required: true },
-    // categoria: [CategoriaSchema], // Relacionamento com a categoria
+    categoria: [CategoriaSchema], // Relacionamento com a categoria
   },
   { timestamps: true } // Adiciona os campos createdAt e updatedAt automaticamente
 );

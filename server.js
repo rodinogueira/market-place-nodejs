@@ -3,6 +3,9 @@ const connectDatabase = require("./src/utils/connectDatabase");
 const userRoutes = require("./src/routes/userRoutes");
 const productRoutes = require("./src/routes/productRoutes"); // Importe as rotas de produtos
 const categoriaRoutes = require("./src/routes/categoriaRoutes");
+const carrinhoRoutes = require("./src/routes/carrinhoRoutes");
+const pedidoRoutes = require("./src/routes/pedidoRoutes");
+
 const swaggerUi = require("swagger-ui-express");
 
 const app = express();
@@ -25,6 +28,11 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes); // Adicione as rotas de produto
 
 app.use("/api/categorias", categoriaRoutes);
+
+app.use("/api/carrinhos", carrinhoRoutes);
+
+// Adicione a rota base para pedidos
+app.use("/api/pedidos", pedidoRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

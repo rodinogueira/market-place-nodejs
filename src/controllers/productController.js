@@ -3,7 +3,7 @@ const productService = require("../services/productService");
 // Lista todos os produtos
 const getAllProducts = async (req, res) => {
     try {
-        const products = await productService.findAllProductsService();
+        const products = await productService.findAllProductsService(req.query.limit, req.query.offset);
         res.json(products);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -64,7 +64,7 @@ const deleteProduct = async (req, res) => {
     const addCategoriaProductController = async (req, res) => {
         try {
             req.body.createdAt = new Date();
-            const categoria = await produdoService.addCategoriaProductService(req.params.id, req.body)
+            const categoria = await productService.addCategoriaProductService(req.params.id, req.body)
             res.status(200).send(categoria);
 
         } catch (error) {
@@ -75,7 +75,7 @@ const deleteProduct = async (req, res) => {
     const removeCategoriaProductController = async (req, res) => {
         try {
             req.body.createdAt = new Date();
-            const categoria = await produdoService.removeCategoriaProductService(req.body)
+            const categoria = await productService.removeCategoriaProductService(req.body)
             res.status(200).send(categoria);
 
         } catch (error) {

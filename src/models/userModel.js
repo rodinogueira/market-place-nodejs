@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     password: { type: String, required: true },
     token: { type: String },
-    // images: { type: mongoose.Schema.Types.Mixed }, // Para armazenar qualquer estrutura de imagem.
+    // images: { type: mongoose.Schema.Types.Mixed },
     images: { type: String, required: true },
     address: [
       {

@@ -122,7 +122,7 @@ const removeUserAddress = async (req, res) => {
 const addUserFavProduct = async (req, res) => {
     try {
         const { productId } = req.body;
-        const user = await userService.addUserFavProductService(req.params.id, { _id: productId });
+        const user = await userService.addUserFavProductService(req.params.id, req.body);
 
         if (!user) return res.status(404).json({ error: "Usuário não encontrado" });
 
