@@ -5,6 +5,7 @@ const productRoutes = require("./src/routes/productRoutes"); // Importe as rotas
 const categoriaRoutes = require("./src/routes/categoriaRoutes");
 const carrinhoRoutes = require("./src/routes/carrinhoRoutes");
 const pedidoRoutes = require("./src/routes/pedidoRoutes");
+const cors = require("cors");
 
 const swaggerUi = require("swagger-ui-express");
 
@@ -12,6 +13,10 @@ const app = express();
 connectDatabase();
 
 app.use(express.json());
+app.use(cors({
+    origin: ["localhost:3001", "*"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+}));
 
 // Swagger setup
 const swaggerDocument = require("./src/swagger/swagger.json");  // Caminho para o arquivo JSON
