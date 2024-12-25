@@ -78,8 +78,8 @@ const validaProduto = (req, res, next) => {
 }
 
 const validaCategoria = (req, res, next) => {
-    if(!req.body.name){
-        return res.status(400).send({ message: "O campo 'name' precisa ser preenchido"})
+    if(!req.body.nome){
+        return res.status(400).send({ message: "O campo 'nome' precisa ser preenchido"})
     }
 
     next();

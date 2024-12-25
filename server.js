@@ -14,7 +14,7 @@ connectDatabase();
 
 app.use(express.json());
 app.use(cors({
-    origin: ["localhost:3001", "*"],
+    origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
 }));
 

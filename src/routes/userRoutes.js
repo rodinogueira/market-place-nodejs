@@ -9,7 +9,7 @@ router.get("/:id", authMiddleware, validaId, userController.getUserById);
 router.post("/", validaUsuario, userController.createUser);
 router.put("/:id", authMiddleware, validaId, validaUsuario, userController.updateUser);
 router.delete("/:id", authMiddleware, validaId, userController.deleteUser);
-router.post("/login", validaLogin, userController.loginUser);
+router.post("/login", userController.loginUser);
 
 // Rotas de endereços do usuário
 router.post("/address/:id", authMiddleware, validaId, validaEndereco, userController.addUserAddress);
