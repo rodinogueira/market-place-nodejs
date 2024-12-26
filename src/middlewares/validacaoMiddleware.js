@@ -65,10 +65,10 @@ const validaProduto = (req, res, next) => {
         erros.push("codigoBarra")
     }
 
-    if(erros.length() == 0) {
+    if(erros.length === 0) {
         return next();
     } else {
-        if(erros.length() > 1) {
+        if(erros.length > 1) {
             return res.status(400).send({message: `Os campos ${erros} precisam ser preenchidos!`}) 
         }else {
             return res.status(400).send({message: `O campo ${erros} precisa ser preenchido!`}) 
@@ -102,10 +102,10 @@ const validaPedido = (req, res, next) => {
         return res.status(400).send({ message: "O campo 'name' precisa ser preenchido"})
     }
 
-    if(erros.length() == 0) {
+    if(erros.length == 0) {
         return next();
     } else {
-        if(erros.length() > 1) {
+        if(erros.length > 1) {
             return res.status(400).send({message: `Os campos ${erros} precisam ser preenchidos!`}) 
         }else {
             return res.status(400).send({message: `O campo ${erros} precisa ser preenchido!`}) 
@@ -128,10 +128,10 @@ const validaCarrinho = (req, res, next) => {
         return res.status(400).send({ message: "O campo 'name' precisa ser preenchido"})
     }
 
-    if(erros.length() == 0) {
+    if(erros.length == 0) {
         return next();
     } else {
-        if(erros.length() > 1) {
+        if(erros.length > 1) {
             return res.status(400).send({message: `Os campos ${erros} precisam ser preenchidos!`}) 
         }else {
             return res.status(400).send({message: `O campo ${erros} precisa ser preenchido!`})
@@ -161,7 +161,7 @@ const validaLogin = (req, res, next) => {
     if(erros.length() == 0) {
         return next();
     } else {
-        if(erros.length() > 1) {
+        if(erros.length > 1) {
             return res.status(400).send({message: `Os campos ${erros} precisam ser preenchidos!`}) 
         }else {
             return res.status(400).send({message: `O campo ${erros} precisa ser preenchido!`})
