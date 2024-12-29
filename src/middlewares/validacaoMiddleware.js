@@ -98,10 +98,6 @@ const validaPedido = (req, res, next) => {
         erros.push("concluido")
     }
 
-    if(!req.body.name){
-        return res.status(400).send({ message: "O campo 'name' precisa ser preenchido"})
-    }
-
     if(erros.length == 0) {
         return next();
     } else {
@@ -124,10 +120,6 @@ const validaCarrinho = (req, res, next) => {
         erros.push("frete")
     }
 
-    if(!req.body.name){
-        return res.status(400).send({ message: "O campo 'name' precisa ser preenchido"})
-    }
-
     if(erros.length == 0) {
         return next();
     } else {
@@ -143,7 +135,7 @@ const validaId = (req, res, next) => {
     if(ObjectId.isValid(req.params.id)) {
         return next();
     } else {
-        return res.status(400).send({message: `O ID não correponde aos padros necessarios!`})
+        return res.status(400).send({message: `O ID não correponde aos padroes necessarios!`})
     }
 }
 

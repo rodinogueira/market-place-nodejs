@@ -12,7 +12,7 @@ router.get("/", authMiddleware, PedidoController.getAllPedidosController);
 router.get("/:id", authMiddleware, validaId, PedidoController.getPedidoByIdController);
 
 // Rota para criar um novo pedido
-router.post("/", authMiddleware, validaPedido, validaId, PedidoController.createPedidoController);
+router.post("/", authMiddleware, validaPedido, PedidoController.createPedidoController);
 
 // Rota para atualizar um pedido por ID
 router.patch("/:id", authMiddleware, validaId, PedidoController.updatePedidoController);
