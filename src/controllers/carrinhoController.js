@@ -2,6 +2,7 @@ const CarrinhoService = require("../services/carrinhoServices");
 
 // Controlador para encontrar um carrinho pelo ID
 const getCarrinhoById = async (req, res) => {
+  console.log(req.params.id);
   try {
     const carrinho = await CarrinhoService.findCarrinhoByIdService(req.params.id);
     if (!carrinho) {
@@ -14,25 +15,10 @@ const getCarrinhoById = async (req, res) => {
   }
 };
 
-// Controlador para criar um novo carrinho
-const createCarrinho = async (req, res) => {
-  try {
-    const corpo = {
-        ...req.body,
-        userId: req.userId,
-        createdAt: new Date()
-    }
-
-    const carrinho = await CarrinhoService.createCarrinhoService(req.params.id, corpo);
-    // res.status(201).send(carrinho);
-    res.status(201).json(carrinho);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 // Controlador para atualizar um carrinho pelo ID
 const updateCarrinho = async (req, res) => {
+  console.log(`updateCarrinho: >> ${req.body}`);
+  console.log(`updateCarrinho id: >>${req.params.id}`);
   try {
     const carrinhoAtualizado = await CarrinhoService.updateCarrinhoService(req.params.id, req.body);
     if (!carrinhoAtualizado) {
@@ -56,6 +42,29 @@ const deleteCarrinho = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+const createCarrinho = async (req, res) => {
+console.log(req.body);
+  try {
+    const corpo = {
+      produtos: req.body.produtos || [], // Se vazio, define como array vazio
+      precoTotal: req.body.precoTotal || 0,
+      quantidade: req.body.quantidade || 0,
+      frete: req.body.frete || 0,
+      userId: req.userId, // Usando o userId da requisição
+      createdAt: new Date(),
+    };
+
+    // Chamando o serviço para criar o carrinho
+    const carrinho = await CarrinhoService.createCarrinhoService(corpo);
+
+    res.status(201).json(carrinho); // Retorna o carrinho criado
+  } catch (error) {
+    res.status(500).json({ error: error.message }); // Retorna o erro em caso de falha
+  }
+};
+
+
 
 // Controlador para listar todos os carrinhos
 const getAllCarrinhos = async (req, res) => {

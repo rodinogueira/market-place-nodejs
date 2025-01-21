@@ -28,7 +28,7 @@ const carrinhoSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "usuarios", // Refere-se ao schema de usuários
-      // required: true
+      required: true
     }
   },
   {
