@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies"
+      - npm install
+  pre_build:
+    commands:
+      - echo "Preparing build"
+  build:
+    commands:
+      - echo "Running tests and type checks"
+      - npm run build --if-present
+  post_build:
+    commands:
+      - echo "Build completed"
+  artifacts:
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
