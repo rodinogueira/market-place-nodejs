@@ -7,17 +7,16 @@ phases:
       - npm install
   pre_build:
     commands:
-      - echo "Preparing build"
+      - echo "Preparing backend build"
   build:
     commands:
-      - echo "Running tests and type checks"
-      - npm run build --if-present
+      - echo "Running backend build (if any)"
+      - node server.js
   post_build:
     commands:
-      - echo "Build completed"
+      - echo "Backend build completed"
   artifacts:
     files:
       - '**/*'
-  cache:
     paths:
       - node_modules/**/*
