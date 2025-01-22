@@ -1,0 +1,45 @@
+name: CI/CD Pipeline para EC2
+
+on:
+  push:
+    branches:
+      - main  # Executa o pipeline ao fazer push na branch 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Usando Ubuntu como runner do GitHub Actions
+
+    steps:
+      # Passo 1: Fazer checkout do código
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      # Passo 2: Instalar dependências
+      - name: Instalar dependências
+        run: npm install
+
+      # Passo 3: Fazer deploy para EC2
+      - name: Fazer deploy para EC2
+        run: |
+          # Salvar a chave SSH privada em um arquivo temporário
+          echo "${{ secrets.EC2_PRIVATE_KEY }}" > minha-chave
+          chmod 600 minha-chave
+
+          # Verificar o diretório de build e imprimir o caminho atual
+          echo "Verificando o caminho do diretório:"
+          pwd  # Exibe o diretório atual
+
+          # Garantir permissão no diretório de destino no EC2
+          echo "Garantir permissão:"
+          ssh -i minha-chave -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} "sudo chown -R ec2-user:ec2-user /var/www/market-place-nodejs"
+
+          # Copiar arquivos do build para a instância EC2
+          echo "Copiando arquivos para EC2..."
+          scp -i minha-chave -o StrictHostKeyChecking=no -r ./* ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/market-place-nodejs
+
+          # Reiniciar o nginx após o deploy
+          ssh -i minha-chave -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} "pm2 restart all"
+          
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
