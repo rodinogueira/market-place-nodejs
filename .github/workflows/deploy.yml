@@ -28,11 +28,19 @@ jobs:
           # Executar os comandos no servidor EC2
           ssh -i minha-chave -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << EOF
             
-            chown -R ec2-user:ec2-user /var/www/market-place-nodejs
+            # Garantir permissões corretas
+            sudo chown -R ec2-user:ec2-user /var/www/market-place-nodejs
             cd /var/www/market-place-nodejs
+
+            # Gerenciar conflitos locais
+            git reset --hard
+            git clean -fd
             git pull origin main
+
+            # Instalar dependências e reiniciar o PM2
             npm install
             pm2 restart all
+            pm2 save  # Sincronizar estado do PM2
           EOF
 
           # Remover a chave temporária
