@@ -14,11 +14,7 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v2
 
-      # Passo 2: Instalar dependências
-      - name: Instalar dependências
-        run: npm install
-
-      # Passo 3: Fazer deploy para EC2
+      # Passo 2: Fazer deploy para EC2
       - name: Fazer deploy para EC2
         run: |
           # Salvar a chave SSH privada em um arquivo temporário
