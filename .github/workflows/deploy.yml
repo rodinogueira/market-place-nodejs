@@ -25,9 +25,6 @@ jobs:
           echo "${{ secrets.EC2_PRIVATE_KEY }}" > minha-chave
           chmod 600 minha-chave
 
-          # Adicionar o host EC2 aos hosts conhecidos
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-
           # Executar os comandos no servidor EC2
           ssh -i minha-chave -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << EOF
 
