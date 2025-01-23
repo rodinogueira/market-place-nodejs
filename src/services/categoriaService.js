@@ -1,4 +1,4 @@
-const Categoria = require("../models/categoria");
+const Categoria = require("../models/Categoria");
 
 // Função para criar uma nova categoria
 const createCategoria = async (nome) => {
