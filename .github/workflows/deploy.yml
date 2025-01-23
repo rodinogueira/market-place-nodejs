@@ -27,7 +27,9 @@ jobs:
 
           # Executar os comandos no servidor EC2
           ssh -i minha-chave -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << EOF
-
+            
+            chown -R ec2-user:ec2-user /var/www/market-place-nodejs
+            cd /var/www/market-place-nodejs
             git pull origin main
             npm install
             pm2 restart all
